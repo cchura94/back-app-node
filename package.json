@@ -19,6 +19,7 @@
     "sequelize-cli": "^6.2.0"
   },
   "dependencies": {
+    "express": "^4.17.1",
     "sequelize": "^6.6.2"
   }
 }
