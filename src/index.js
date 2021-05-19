@@ -15,6 +15,10 @@ app.get("/test", (req, res) => {
     res.send("Hola Bienvenido a mi Página con Node.js");
 });
 
+app.get("/", (req, res) => {
+    res.send("Saludos Humanos-!!");
+});
+
 // levantar el servidor
 app.listen(app.get("puerto"), app.get("host"), () => {
     console.log(`Servidor levantado en http://${app.get("host")}:${app.get("puerto")}`);
