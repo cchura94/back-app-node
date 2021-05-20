@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon --exec babel-node src/index.js",
     "build": "babel src/ --out-dir dist",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "migrate": "npx sequelize-cli db:migrate"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +21,8 @@
   },
   "dependencies": {
     "express": "^4.17.1",
+    "pg": "^8.6.0",
+    "pg-hstore": "^2.3.3",
     "sequelize": "^6.6.2"
   }
 }

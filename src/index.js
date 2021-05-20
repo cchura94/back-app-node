@@ -1,5 +1,6 @@
 // importar dependencias npm (express)
 import express from "express"
+import routes from "./routes/index.js";
 
 // Variables 
 const PORT = process.env.PORT || 3000;
@@ -9,6 +10,9 @@ let app = express();
 
 app.set("puerto", PORT);
 app.set("host", HOST);
+
+// config rutas
+app.use("/api", routes);
 
 // rutas
 app.get("/test", (req, res) => {
