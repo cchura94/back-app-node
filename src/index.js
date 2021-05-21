@@ -11,6 +11,11 @@ let app = express();
 app.set("puerto", PORT);
 app.set("host", HOST);
 
+// json (req.body)
+app.use(express.json()) // for parsing application/json
+app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
+
 // config rutas
 app.use("/api", routes);
 
