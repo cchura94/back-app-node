@@ -1,4 +1,4 @@
-import models from "./../models"
+import models, { sequelize } from "./../models"
 
 /**
  * Permite autenticarme
@@ -6,20 +6,22 @@ import models from "./../models"
  * @param {*} res respuesta servidor
  */
 export const ingresar = function(req, res){
-
-    models.Usuario.findAll({
+    // select * from usuarios where email = req.body.email
+    //sequelize.query(`select * from usuarios where email = ${req.body.email}`)
+    models.Usuario.findOne({
         where: {
             email: req.body.email
         }
-    }).then((user) => {
-        console.log(user.length)
-        if(user.length == 0){
+    }).then((user) => {        
+        
+        console.log(user)
+        if(!user){
             res.json({mensaje: "El Usuario no existe", error: true})
         }else{
-            if(req.body.password == user[0].password){
+            if(req.body.password == user.password){
                 res.json({mensaje: "Bienvenido", data: user, error: false})
             }else{
-                res.json({mensaje: "Contrseña incorrecta", error: true})
+                res.json({mensaje: "Contraseña incorrecta", error: true})
             }
         }
     }).catch(error => {
@@ -28,6 +30,33 @@ export const ingresar = function(req, res){
     })
     // logica 
     //res.json({mensaje: "Bienvenido usuario", error: false});
+}
+
+// async await
+
+export const ingresar2 = async function (req, res){
+
+    try {
+        let user = await models.Usuario.findOne({
+            where: {
+                email: req.body.email
+            }
+        });
+    
+        if(!user){
+            res.json({mensaje: "El Usuario no existe", error: true})
+        }else{
+            if(req.body.password == user.password){
+                res.json({mensaje: "Bienvenido", data: user, error: false})
+            }else{
+                res.json({mensaje: "Contraseña incorrecta", error: true})
+            }
+        }
+    } catch (error) {
+        console.log(error);
+        res.json({mensaje: "Error al authenticar", error: true});
+    }
+
 }
 
 
