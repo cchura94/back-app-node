@@ -8,7 +8,7 @@ import * as authController from "./../controllers/authController.js"
 // Rutas Autenticación
 router.post("/auth/login", authController.ingresar);
 router.post("/auth/login2", authController.ingresar2);
-router.post("/registro", authController.registroUsuario);
+router.post("/registro", authController.registroUsuario2);
 
 
 // module.exports = router;

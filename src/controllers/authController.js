@@ -1,5 +1,7 @@
 import models, { sequelize } from "./../models"
+import bcrypt from "bcrypt"
 
+var BCRYPT_SALT_ROUNDS = 12;
 /**
  * Permite autenticarme
  * @param {*} req petición cliente
@@ -46,7 +48,8 @@ export const ingresar2 = async function (req, res){
         if(!user){
             res.json({mensaje: "El Usuario no existe", error: true})
         }else{
-            if(req.body.password == user.password){
+            let verif = await bcrypt.compare(req.body.password, user.password);
+            if(verif){
                 res.json({mensaje: "Bienvenido", data: user, error: false})
             }else{
                 res.json({mensaje: "Contraseña incorrecta", error: true})
@@ -73,7 +76,33 @@ export const registroUsuario = function (req, res){
     }).catch(error => {
         console.log(error);
         res.json({mensaje: "Error al registrar el usuario", error: true});
-    })
-    
+    })    
 }
 
+export const registroUsuario2 = async function(req, res){
+    // validar
+    try{
+        let hashedPassword = await bcrypt.hash(req.body.password, BCRYPT_SALT_ROUNDS)
+        req.body.password = hashedPassword
+
+        console.log("********* ", hashedPassword)
+
+        let user = await models.Usuario.findOne({
+            where: {
+                email: req.body.email
+            }
+        });
+
+        if(user){
+            res.json({mensaje: "El correo ya está registrado",error: true})
+        }else{
+            let user = await models.Usuario.create(req.body);
+            console.log(user)
+            res.json({mensaje: "Usuario Registrado", dato: user,error: false})
+        }
+ 
+    }catch(error){
+        console.log(error);
+        res.json({mensaje: "Error al registrar el usuario", error: true});
+    }
+}
