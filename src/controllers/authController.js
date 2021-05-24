@@ -1,5 +1,8 @@
 import models, { sequelize } from "./../models"
 import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken"
+import { tiempo_expiracion, codigo_secreto } from './../config/config'
+// import * as config from "./../config/config"
 
 var BCRYPT_SALT_ROUNDS = 12;
 /**
@@ -50,7 +53,19 @@ export const ingresar2 = async function (req, res){
         }else{
             let verif = await bcrypt.compare(req.body.password, user.password);
             if(verif){
-                res.json({mensaje: "Bienvenido", data: user, error: false})
+                // generar el token (jwt)
+                const payload = {
+                    correo: user.email,
+                    id: user.id,
+                    time: new Date(),
+                    tiempo_expiracion: tiempo_expiracion
+                }
+
+                let token = jwt.sign(payload, codigo_secreto, {
+                    expiresIn: tiempo_expiracion
+                });
+                
+                res.json({usuario: payload, token: token, error: false})
             }else{
                 res.json({mensaje: "Contraseña incorrecta", error: true})
             }
@@ -71,6 +86,7 @@ export const ingresar2 = async function (req, res){
 export const registroUsuario = function (req, res){
     console.log(req.body);
 
+    // insert into usuarios (email, password) values ('')
     models.Usuario.create(req.body).then((user) => {
         res.json({mensaje: "Usuario Registrado", error: false})
     }).catch(error => {
