@@ -15,6 +15,16 @@ app.set("host", HOST);
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
+// CORS
+app.use(function(req, res, next){
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    res.setHeader('Access-Control-Allow-Headers', 'content-type');
+
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+
+    next();
+})
 
 // config rutas
 app.use("/api", routes);
