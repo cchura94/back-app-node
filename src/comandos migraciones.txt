@@ -1,0 +1,2 @@
+npx sequelize-cli model:generate --name Categoria --attributes nombre:string,detalle:text
+npx sequelize-cli model:generate --name Producto --attributes nombre:string,stock:integer,precio:decimal,imagen:string,descripcion:text,categoria_id:integer
