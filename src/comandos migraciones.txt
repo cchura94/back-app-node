@@ -1,2 +1,9 @@
 npx sequelize-cli model:generate --name Categoria --attributes nombre:string,detalle:text
-npx sequelize-cli model:generate --name Producto --attributes nombre:string,stock:integer,precio:decimal,imagen:string,descripcion:text,categoria_id:integer
+npx sequelize-cli model:generate --name Producto --attributes nombre:string,stock:integer,precio:decimal,imagen:string,descripcion:text,categoriaId:integer
+npx sequelize-cli model:generate --name Cliente --attributes nombre_completo:string,ci_nit:string,telefono:string,correo:string
+npx sequelize-cli model:generate --name Pedido --attributes fecha_pedido:date,monto_total:decimal,clienteId:integer
+npx sequelize-cli model:generate --name Proveedor --attributes nombre:string,telefono:string,correo:string,direccion:string
+npx sequelize-cli model:generate --name PedidoProducto --attributes productoId:integer,pedidoId:integer,cantidad:integer
+npx sequelize-cli model:generate --name ProductoProveedor --attributes productoId:integer,proveedorId:integer,cantidad:integer,estado:boolean
+
+npx sequelize-cli migration:generate --name add_estado_to_pedidos
