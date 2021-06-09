@@ -39,3 +39,16 @@ export const guardar = async function(req, res){
         })
     }
 } 
+
+export const eliminar = async function(req, res){
+    let id_cat = req.params.id;
+    //  DELETE FROM "Categoria" WHERE "id" = '2'
+    await models.Categoria.destroy({
+        where: {id: id_cat}
+    });
+
+    res.json({
+        mensaje: "Categoria Eliminada",
+        error: false
+    });
+}

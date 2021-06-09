@@ -15,6 +15,7 @@ router.post("/registro", verificaAuth, authController.registroUsuario2);
 // rutas de Categoria
 router.get("/categoria", catController.lista);
 router.post("/categoria", catController.guardar);
+router.delete("/categoria/:id", catController.eliminar);
 
 // module.exports = router;
 export default router;
