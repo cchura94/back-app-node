@@ -4,7 +4,11 @@ import models from "./../models"
 export const lista = async function(req, res){
     // select * from proveedores (SQL)
     try{
-        let datos = await models.Proveedor.findAll();
+        let datos = await models.Proveedor.findAll({
+            order: [
+                ['id', 'DESC'],
+            ]
+        });
         res.json(datos);
     }catch(error){
         res.status(500).send({
@@ -41,6 +45,30 @@ export const guardar = async function(req, res){
         }
     }
 } 
+
+export const modificar = async function(req, res){
+    const id_prov = req.params.id;
+    try{
+        // UPDATE Proveedor nombre='prueba' where id: id_cat  
+        let data = await models.Proveedor.update(req.body, {
+            where: {
+                id: id_prov
+            }
+        })
+        res.json({
+            mensaje: "Proveedor Modificado",
+            data: data,
+            error: false
+        });
+
+    } catch(error){
+        res.status(500).send({
+            error: true,
+            mensaje: error.message || 'Error al modificar en la base de datos'
+        })
+    }
+    
+}
 
 export const eliminar = async function(req, res){
     let id_cat = req.params.id;

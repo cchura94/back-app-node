@@ -40,6 +40,25 @@ export const guardar = async function(req, res){
     }
 } 
 
+export const modificar = async function(req, res){
+    const id_cat = req.params.id;
+    try{
+        // UPDATE Categoria nombre='prueba' where id: id_cat  
+        await models.Categoria.update(req.body, {
+            where: {
+                id: id_cat
+            }
+        })
+
+    } catch(error){
+        res.status(500).send({
+            error: true,
+            mensaje: error.message || 'Error al modificar en la base de datos'
+        })
+    }
+    
+}
+
 export const eliminar = async function(req, res){
     let id_cat = req.params.id;
     //  DELETE FROM "Categoria" WHERE "id" = '2'

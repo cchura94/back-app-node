@@ -11,16 +11,18 @@ import * as provController  from "./../controllers/proveedorController"
 router.post("/auth/login", authController.ingresar);
 router.post("/auth/login2", authController.ingresar2);
 
-router.post("/registro", verificaAuth, authController.registroUsuario2);
+router.post("/registro", authController.registroUsuario2);
 
 // rutas de Categoria
 router.get("/categoria", catController.lista);
 router.post("/categoria", catController.guardar);
+router.put("/categoria/:id", catController.modificar);
 router.delete("/categoria/:id", catController.eliminar);
 
 // Rutas de Proveedor
 router.get("/proveedor", provController.lista);
 router.post("/proveedor", provController.guardar);
+router.put("/proveedor/:id", provController.modificar);
 router.delete("/proveedor/:id", provController.eliminar);
 
 // module.exports = router;
