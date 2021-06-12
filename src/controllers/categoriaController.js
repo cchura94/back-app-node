@@ -5,6 +5,17 @@ export const lista = async function(req, res){
     // select * from categorias (SQL)
     try{
         let datos = await models.Categoria.findAll();
+        // ver todas las categorias + eliminar
+        /*let datos = await models.Categoria.findAll({
+            paranoid: false
+        });
+        */
+       // recuperar una categoria eliminada 3
+       /*await models.Categoria.restore({
+           where: {id:3}
+       })
+       res.send([]);
+       */
         res.json(datos);
     }catch(error){
         res.status(500).send({
