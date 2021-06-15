@@ -6,6 +6,22 @@ POST http://127.0.0.1:3000/api/registro HTTP/1.1
 content-type: application/json
 
 {
-    "email": "cristian@gmail.com",
+    "email": "cristian2@gmail.com",
     "password": "cristian12345"
+}
+
+###
+GET  http://127.0.0.1:3000/api/producto?page=2&limit=2 HTTP/1.1
+
+###
+POST http://127.0.0.1:3000/api/producto HTTP/1.1
+content-Type: application/json
+
+{
+    "nombre": "Mochila",
+    "stock": 2,
+    "precio": 380,
+    "descripcion": "Mochila de cuero",
+    "categoriaId": 2
+
 }
