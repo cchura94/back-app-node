@@ -11,6 +11,8 @@ let app = express();
 app.set("puerto", PORT);
 app.set("host", HOST);
 
+// Para vuejs e imagenes
+app.use(express.static('public'))
 // json (req.body)
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded

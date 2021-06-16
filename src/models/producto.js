@@ -16,11 +16,16 @@ module.exports = (sequelize, DataTypes) => {
       });
       // N:M
       Producto.belongsToMany(models.Pedido, {
-        through: "PedidoProductos" // nombre de la tabla relación
+        through: {
+          model: "PedidoProductos",
+          scope: {cantidad: 0}
+        }, // nombre de la tabla relación
+        foreignKey: "productoId"
       });
       // N:M
        Producto.belongsToMany(models.Proveedor, {
         through: "ProductoProveedors" // nombre de la tabla relación
+        
       });
     }
   };

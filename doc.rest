@@ -25,3 +25,36 @@ content-Type: application/json
     "categoriaId": 2
 
 }
+
+###
+// Clientes
+GET http://127.0.0.1:3000/api/cliente
+
+###
+POST http://127.0.0.1:3000/api/cliente HTTP/1.1
+content-Type: application/json
+
+{
+    "nombre_completo": "Andres Perez",
+    "ci_nit": "131232",
+    "telefono": "23443242",
+    "correo": "andres@gmail.com"
+}
+###
+
+// Pedidos
+GET http://127.0.0.1:3000/api/pedido
+###
+
+
+POST http://127.0.0.1:3000/api/pedido HTTP/1.1
+content-Type: application/json
+
+{
+    "monto_total": 650,
+    "cliente_id": 2,
+    "productos": [
+        {"producto_id": 2, "cantidad": 2},
+        {"producto_id": 1, "cantidad": 2}
+    ]
+}

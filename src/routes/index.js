@@ -10,6 +10,8 @@ import * as catController  from "./../controllers/categoriaController"
 
 import * as provController  from "./../controllers/proveedorController"
 import * as prodController  from "./../controllers/productoController"
+import * as clieController  from "./../controllers/clienteController"
+import * as pedController  from "./../controllers/pedidoController"
 
 // Cofiguración multer
 var storage = multer.diskStorage({
@@ -42,11 +44,22 @@ router.put("/proveedor/:id", provController.modificar);
 router.delete("/proveedor/:id", provController.eliminar);
 
 // Rutas Para Producto
-router.get("/producto", prodController.lista);
+router.get("/producto", verificaAuth,prodController.lista);
 router.post("/producto", upload.single("imagen"), prodController.guardar);
 router.get("/producto/:id", prodController.mostrar);
 router.put("/producto/:id", prodController.modificar);
 router.delete("/producto/:id", prodController.eliminar);
 
+// Cliente
+router.get("/cliente", clieController.lista)
+router.post("/cliente", clieController.guardar)
+router.put("/cliente/:id", clieController.modificar);
+router.delete("/cliente/:id", clieController.eliminar);
+
+// Pedido
+router.get("/pedido", pedController.lista)
+router.post("/pedido", pedController.guardar)
+router.put("/pedido/:id", pedController.modificar);
+router.delete("/pedido/:id", pedController.eliminar);
 // module.exports = router;
 export default router;

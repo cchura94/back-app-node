@@ -18,7 +18,9 @@ module.exports = (sequelize, DataTypes) => {
 
       // N:M
       Pedido.belongsToMany(models.Producto, {
-        through: "PedidoProductos" // nombre de la tabla relación
+        through: "PedidoProductos", // nombre de la tabla relación
+        foreignKey: "pedidoId",
+        
       });
 
     }
