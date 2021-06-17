@@ -40,6 +40,6 @@ app.get("/", (req, res) => {
   res.send("Saludos Humanos-!!");
 }); // levantar el servidor
 
-app.listen(app.get("puerto"), app.get("host"), () => {
+app.listen(app.get("puerto"), () => {
   console.log(`Servidor levantado en http://${app.get("host")}:${app.get("puerto")}`);
 });
