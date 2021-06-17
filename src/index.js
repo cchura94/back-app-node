@@ -27,7 +27,7 @@ app.use(function(req, res, next){
 
     next();
 })
-
+console.log("Hola Mundo")
 // config rutas
 app.use("/api", routes);
 
