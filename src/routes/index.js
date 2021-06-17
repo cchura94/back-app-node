@@ -29,37 +29,44 @@ var storage = multer.diskStorage({
 router.post("/auth/login", authController.ingresar);
 router.post("/auth/login2", authController.ingresar2);
 
-router.post("/registro", authController.registroUsuario2);
+router.post("/registro", verificaAuth,authController.registroUsuario2);
 
 // rutas de Categoria
-router.get("/categoria", catController.lista);
-router.post("/categoria", catController.guardar);
-router.put("/categoria/:id", catController.modificar);
-router.delete("/categoria/:id", catController.eliminar);
+router.get("/categoria", verificaAuth, catController.lista);
+router.post("/categoria", verificaAuth, catController.guardar);
+router.put("/categoria/:id", verificaAuth, catController.modificar);
+router.delete("/categoria/:id", verificaAuth, catController.eliminar);
 
 // Rutas de Proveedor
-router.get("/proveedor", provController.lista);
-router.post("/proveedor", provController.guardar);
-router.put("/proveedor/:id", provController.modificar);
-router.delete("/proveedor/:id", provController.eliminar);
+router.get("/proveedor", verificaAuth, provController.lista);
+router.post("/proveedor", verificaAuth, provController.guardar);
+router.put("/proveedor/:id", verificaAuth, provController.modificar);
+router.delete("/proveedor/:id", verificaAuth, provController.eliminar);
 
 // Rutas Para Producto
-router.get("/producto", verificaAuth,prodController.lista);
-router.post("/producto", upload.single("imagen"), prodController.guardar);
-router.get("/producto/:id", prodController.mostrar);
-router.put("/producto/:id", prodController.modificar);
-router.delete("/producto/:id", prodController.eliminar);
+router.get("/producto", verificaAuth, prodController.lista);
+router.post("/producto", verificaAuth, upload.single("imagen"), prodController.guardar);
+router.get("/producto/:id", verificaAuth, prodController.mostrar);
+router.put("/producto/:id", verificaAuth, prodController.modificar);
+router.delete("/producto/:id", verificaAuth, prodController.eliminar);
 
 // Cliente
-router.get("/cliente", clieController.lista)
-router.post("/cliente", clieController.guardar)
-router.put("/cliente/:id", clieController.modificar);
-router.delete("/cliente/:id", clieController.eliminar);
+router.get("/cliente", verificaAuth, clieController.lista)
+router.post("/cliente", verificaAuth, clieController.guardar)
+router.put("/cliente/:id", verificaAuth, clieController.modificar);
+router.delete("/cliente/:id", verificaAuth, clieController.eliminar);
 
 // Pedido
-router.get("/pedido", pedController.lista)
-router.post("/pedido", pedController.guardar)
-router.put("/pedido/:id", pedController.modificar);
-router.delete("/pedido/:id", pedController.eliminar);
+router.get("/pedido", verificaAuth, pedController.lista)
+router.post("/pedido", verificaAuth, pedController.guardar)
+router.put("/pedido/:id", verificaAuth, pedController.modificar);
+router.delete("/pedido/:id", verificaAuth, pedController.eliminar);
+
+router.get("/verifica", verificaAuth, function(req, res){
+    res.status(200).send({
+      mensaje: "Auth",
+      error: false
+  })
+});
 // module.exports = router;
 export default router;

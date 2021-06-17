@@ -18,12 +18,27 @@ module.exports = (sequelize, DataTypes) => {
 
   ;
   Usuario.init({
-    email: DataTypes.STRING,
+    email: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: "El campo email no deberia estar vacio"
+        },
+        isEmail: {
+          msg: "El correo debe ser valido"
+        }
+      },
+      unique: {
+        args: true,
+        msg: "El correo ya existe"
+      }
+    },
     password: DataTypes.STRING,
     estado: DataTypes.BOOLEAN
   }, {
     sequelize,
-    modelName: 'Usuario'
+    modelName: 'Usuario',
+    paranoid: true
   });
   return Usuario;
 };
