@@ -29,7 +29,8 @@ app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Headers', 'content-type, Accept, Authorization');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   next();
-}); // config rutas
+});
+console.log("Hola Mundo"); // config rutas
 
 app.use("/api", _index.default); // rutas
 
